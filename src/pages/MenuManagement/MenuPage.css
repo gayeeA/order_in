@@ -47,6 +47,14 @@ body {
   padding: 32px;
 
   box-sizing: border-box;
+
+  background-image: url('../../assets/Vector.png');
+
+  background-size: contain;
+
+  background-repeat: no-repeat;
+
+  background-position: bottom;
 }
 
 .menu-header-bar {
