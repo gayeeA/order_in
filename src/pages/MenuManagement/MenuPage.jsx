@@ -1,9 +1,9 @@
-// File: C:\Users\HP\OneDrive\Desktop\Restuarent_Web_Appliaction\order_in\src\components\login\MenuPage.jsx
 
-import React from "react";
+
+import React, { useState } from "react";
 
 import "./MenuPage.css";
-
+import CreatePopAdForm from './Promotions';
 // Base64 data for the item images (placeholders for real data)
 
 const imageBase64 = {
@@ -200,6 +200,223 @@ const menuItems = [
 ];
 
 const MenuPage = () => {
+  const [showPromotionsForm, setShowPromotionsForm] = useState(false);
+  const [menuItems, setMenuItems] = useState([
+    {
+      category: "Rice",
+      name: "Biryani",
+      image: imageBase64.biryani,
+      price: "$250",
+      promotions: true,
+      availability: "Yes",
+      description: "Masala Biryani with boiled egg",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Sandwich",
+      name: "Chicken Burger",
+      image: imageBase64.chickenBurger,
+      price: "$100",
+      promotions: true,
+      availability: "Yes",
+      description: "Masala Biryani with boiled egg",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Rice",
+      name: "Veg Fried Rice",
+      image: imageBase64.vegFriedRice,
+      price: "$80",
+      promotions: true,
+      availability: "Yes",
+      description: "Masala Biryani with boiled egg",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Starters",
+      name: "Chicken Manchuria",
+      image: imageBase64.chickenManchuria,
+      price: "$120",
+      promotions: true,
+      availability: "Yes",
+      description: "Masala Biryani with boiled egg",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Starters",
+      name: "Gobi Manchuria",
+      image: imageBase64.gobiManchuria,
+      price: "$100",
+      promotions: true,
+      availability: "Yes",
+      description: "Masala Biryani with boiled egg",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Beverages",
+      name: "Redvelvet Cake 1pc",
+      image: imageBase64.redVelvetCake,
+      price: "$70",
+      promotions: true,
+      availability: "Yes",
+      description: "Masala Biryani with boiled egg",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Rice",
+      name: "Spl Dum Biryani",
+      image: imageBase64.splDumBiryani,
+      price: "$300",
+      promotions: true,
+      availability: "Yes",
+      description: "Masala Biryani with boiled egg",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Rice",
+      name: "Gobi Rice",
+      image: imageBase64.gobiRice,
+      price: "$80",
+      promotions: false,
+      availability: "No",
+      description: "Masala Biryani with boiled egg",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Beverages",
+      name: "Chocolate Dessert",
+      image: imageBase64.chocolateDessert,
+      price: "$99",
+      promotions: false,
+      availability: "No",
+      description: "Masala Biryani with boiled egg",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Rice",
+      name: "Chicken Biryani",
+      image: imageBase64.biryani,
+      price: "$260",
+      promotions: true,
+      availability: "Yes",
+      description: "Spicy chicken biryani",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Starters",
+      name: "Paneer Tikka",
+      image: imageBase64.gobiManchuria,
+      price: "$150",
+      promotions: false,
+      availability: "Yes",
+      description: "Grilled paneer with spices",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Dessert",
+      name: "Gulab Jamun",
+      image: imageBase64.chocolateDessert,
+      price: "$50",
+      promotions: true,
+      availability: "Yes",
+      description: "Sweet milk solids balls",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Rice",
+      name: "Chicken Biryani 2",
+      image: imageBase64.biryani,
+      price: "$260",
+      promotions: true,
+      availability: "Yes",
+      description: "Spicy chicken biryani",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Starters",
+      name: "Paneer Tikka 2",
+      image: imageBase64.gobiManchuria,
+      price: "$150",
+      promotions: false,
+      availability: "Yes",
+      description: "Grilled paneer with spices",
+      videos: "abc.mp4",
+    },
+    {
+      category: "Dessert",
+      name: "Gulab Jamun 2",
+      image: imageBase64.chocolateDessert,
+      price: "$50",
+      promotions: true,
+      availability: "Yes",
+      description: "Sweet milk solids balls",
+      videos: "abc.mp4",
+    },
+  ]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
+  const [editedItems, setEditedItems] = useState([]);
+
+  const handleOpenPromotions = () => {
+    setShowPromotionsForm(true);
+  };
+
+  const handleClosePromotions = () => {
+    setShowPromotionsForm(false);
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+    setEditedItems([...menuItems]);
+  };
+
+  const handleAdd = () => {
+    const newItem = {
+      category: "",
+      name: "",
+      image: "",
+      price: "",
+      promotions: false,
+      availability: "Yes",
+      description: "",
+      videos: "",
+    };
+    setMenuItems([newItem, ...menuItems]);
+    setIsAdding(true);
+    setIsEditing(true);
+    setEditedItems([newItem, ...menuItems]);
+  };
+
+  const handleSave = () => {
+    setMenuItems(editedItems);
+    setIsEditing(false);
+    setIsAdding(false);
+  };
+
+  const handleCancel = () => {
+    if (isAdding) {
+      setMenuItems(menuItems.slice(1));
+    }
+    setIsEditing(false);
+    setIsAdding(false);
+    setEditedItems([]);
+  };
+
+  const handleInputChange = (index, field, value) => {
+    const updatedItems = [...editedItems];
+    updatedItems[index][field] = value;
+    setEditedItems(updatedItems);
+  };
+
+
+
+  // Conditional rendering: If the form is open, render only the form
+
+  if (showPromotionsForm) {
+
+    return <CreatePopAdForm onClose={handleClosePromotions} />;
+
+  }
   return (
     <div className="menu-management-container">
        {/* --- TOP HEADER ROW: Back Button and Title --- */}
@@ -233,15 +450,19 @@ const MenuPage = () => {
 
 
             {/* Action Buttons */}
-
           <div className="header-actions">
-
-            <button className="btn-primary">EDIT</button>
-
-            <button className="btn-primary">ADD</button>
-
-            <button className="btn-primary">Create Promotions</button>
-
+            {isEditing ? (
+              <>
+                <button className="btn-primary" onClick={handleSave}>SAVE</button>
+                <button className="btn-primary" onClick={handleCancel}>CANCEL</button>
+              </>
+            ) : (
+              <>
+                <button className="btn-primary" onClick={handleEdit}>EDIT</button>
+                <button className="btn-primary" onClick={handleAdd}>ADD</button>
+                <button className="btn-primary" onClick={handleOpenPromotions}>Create Promotions</button>
+              </>
+            )}
           </div>
 
       </div>
@@ -273,11 +494,33 @@ const MenuPage = () => {
               </thead>
 
               <tbody>
-                {menuItems.map((item, index) => (
+                {(isEditing ? editedItems : menuItems).map((item, index) => (
                   <tr key={index}>
-                    <td>{item.category}</td>
+                    <td>
+                      {isEditing ? (
+                        <textarea
+                          value={item.category}
+                          onChange={(e) => handleInputChange(index, 'category', e.target.value)}
+                          rows="1"
+                          style={{ width: '100%', border: 'none', background: 'transparent' }}
+                        />
+                      ) : (
+                        item.category
+                      )}
+                    </td>
 
-                    <td>{item.name}</td>
+                    <td>
+                      {isEditing ? (
+                        <textarea
+                          value={item.name}
+                          onChange={(e) => handleInputChange(index, 'name', e.target.value)}
+                          rows="1"
+                          style={{ width: '100%', border: 'none', background: 'transparent' }}
+                        />
+                      ) : (
+                        item.name
+                      )}
+                    </td>
 
                     <td>
                       <img
@@ -287,24 +530,78 @@ const MenuPage = () => {
                       />
                     </td>
 
-                    <td>{item.price}</td>
+                    <td>
+                      {isEditing ? (
+                        <textarea
+                          value={item.price}
+                          onChange={(e) => handleInputChange(index, 'price', e.target.value)}
+                          rows="1"
+                          style={{ width: '100%', border: 'none', background: 'transparent' }}
+                        />
+                      ) : (
+                        item.price
+                      )}
+                    </td>
 
                     <td>
                       <label className="switch">
                         <input
                           type="checkbox"
-                          defaultChecked={item.promotions}
+                          checked={item.promotions}
+                          onChange={(e) => {
+                            const value = e.target.checked;
+                            if (isEditing) {
+                              handleInputChange(index, 'promotions', value);
+                            } else {
+                              const updatedItems = [...menuItems];
+                              updatedItems[index].promotions = value;
+                              setMenuItems(updatedItems);
+                            }
+                          }}
                         />
 
                         <span className="slider round"></span>
                       </label>
                     </td>
 
-                    <td>{item.availability}</td>
+                    <td>
+                      {isEditing ? (
+                        <textarea
+                          value={item.availability}
+                          onChange={(e) => handleInputChange(index, 'availability', e.target.value)}
+                          rows="1"
+                          style={{ width: '100%', border: 'none', background: 'transparent' }}
+                        />
+                      ) : (
+                        item.availability
+                      )}
+                    </td>
 
-                    <td>{item.description}</td>
+                    <td>
+                      {isEditing ? (
+                        <textarea
+                          value={item.description}
+                          onChange={(e) => handleInputChange(index, 'description', e.target.value)}
+                          rows="3"
+                          style={{ width: '100%', border: 'none', background: 'transparent' }}
+                        />
+                      ) : (
+                        item.description
+                      )}
+                    </td>
 
-                    <td>{item.videos}</td>
+                    <td>
+                      {isEditing ? (
+                        <textarea
+                          value={item.videos}
+                          onChange={(e) => handleInputChange(index, 'videos', e.target.value)}
+                          rows="1"
+                          style={{ width: '100%', border: 'none', background: 'transparent' }}
+                        />
+                      ) : (
+                        item.videos
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
