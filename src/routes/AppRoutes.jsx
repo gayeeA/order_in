@@ -6,7 +6,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 // import ProtectedRoute from "../components/common/ProtectedRoute";
 
 // // Dashboard
-// import DashboardHome from "../components/dashboard/DashboardHome";
+import DashboardHome from "../components/dashboard/DashboardHome";
 
 // // Menu Management
 import MenuPage from "../pages/MenuManagement/MenuPage";
@@ -34,14 +34,14 @@ const AppRoutes = () => {
       <Route path="/" element={<Navigate to="/dashboard" />} />
 
       {/* Dashboard */}
-      {/* <Route
+      <Route
         path="/dashboard"
         element={
-          <ProtectedRoute>
+          
             <DashboardHome />
-          </ProtectedRoute>
+          
         }
-      /> */}
+      />
 
       {/* ✅ Menu Management */}
       <Route
@@ -67,7 +67,7 @@ const AppRoutes = () => {
             <Promotions />
           </ProtectedRoute>
         } */}
-      />
+      {/* /> */}
 
       {/* Orders
       <Route
